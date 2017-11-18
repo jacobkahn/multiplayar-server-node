@@ -70,7 +70,6 @@ app.post('/object', function (req, res, next) {
     // We're updating an existing object id
     objectId = req.body.objectId;
   }
-  console.log(req.body.x);
   var objectCoords = { x: req.body.x, y: req.body.y, z: req.body.z };
   console.log("Creating new object with id " + objectId + " at coords " + JSON.stringify(objectCoords));
   objectDatabase[objectId] = objectCoords;
@@ -81,7 +80,6 @@ app.post('/object', function (req, res, next) {
  * Sends back all object data
  */
 app.get('/sync', function (req, res, next) {
-  console.log("Sending object data: " + objectDatabase);
   // Serialize for transport
   var objects = [];
   for (var objectId in objectDatabase) {
@@ -101,7 +99,9 @@ app.get('/sync', function (req, res, next) {
       z: userLocations[userId].z,
     });
   }
-  res.send({ objects: objects, users: users });
+  var response = { objects: objects, users: users };
+  console.log("Sending response data: " + JSON.stringify(response));    
+  res.send(response);
 });
 
 // error handler

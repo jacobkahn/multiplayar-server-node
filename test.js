@@ -82,4 +82,69 @@ describe('Server', function () {
         });
     });
   });
+
+  describe('new user objects', function () {
+    it('responds with equal data', function (done) {
+      // Submit a new user anchor
+      chai.request(app)
+        .post('/object')
+        .send({
+          x: '1',
+          y: '2',
+          z: '3',
+        })
+        .end(function (err, res) {
+          expect(res).to.have.status(200);
+          var objectId = res.text;
+          // Check sync
+          chai.request(app)
+            .get('/sync')
+            .end(function (err, res) {
+              expect(res).to.have.status(200);
+              var responseData = JSON.parse(res.text);
+              for (var user in responseData.users) {
+                if (responseData.id == objectId) {
+                  expect(user).to.eql({
+                    id: objectId,
+                    x: '1',
+                    y: '2',
+                    z: '3',
+                  });
+                }
+              }
+
+              // Update the object
+              chai.request(app)
+                .post('/object')
+                .send({
+                  objectId: objectId,
+                  x: '-1',
+                  y: '-2',
+                  z: '-3',
+                })
+                .end(function (err, res) {
+                  expect(res).to.have.status(200);
+                  // Check sync
+                  chai.request(app)
+                    .get('/sync')
+                    .end(function (err, res) {
+                      expect(res).to.have.status(200);
+                      var responseData = JSON.parse(res.text);
+                      for (var user in responseData.users) {
+                        if (responseData.id == objectId) {
+                          expect(user).to.eql({
+                            id: objectId,
+                            x: '-1',
+                            y: '-2',
+                            z: '-3',
+                          });
+                        }
+                      }
+                      done();
+                    });
+                });
+            });
+        });
+    });
+  });
 });
