@@ -5,6 +5,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Background logs
+nohup.out
+
 # Runtime data
 pids
 *.pid
