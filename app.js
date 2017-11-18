@@ -51,10 +51,11 @@ app.get('/', function (req, res, next) {
  * Sets the user anchor and their current position relative to it
  */
 app.post('/anchor', function (req, res, next) {
-  console.log(req.body);
-  var userCoords = { x: req.body.x, y: req.body.y, z: req.body.z };
-
   var userId = uuid();
+  if (req.body.userId) {
+    userId = req.body.userId;
+  }
+  var userCoords = { x: req.body.x, y: req.body.y, z: req.body.z };
   console.log("Setting user " + userId + " at coords " + JSON.stringify(userCoords));
   userLocations[userId] = userCoords;
   res.send(userId);
@@ -69,6 +70,7 @@ app.post('/object', function (req, res, next) {
     // We're updating an existing object id
     objectId = req.body.objectId;
   }
+  console.log(req.body.x);
   var objectCoords = { x: req.body.x, y: req.body.y, z: req.body.z };
   console.log("Creating new object with id " + objectId + " at coords " + JSON.stringify(objectCoords));
   objectDatabase[objectId] = objectCoords;
@@ -80,7 +82,26 @@ app.post('/object', function (req, res, next) {
  */
 app.get('/sync', function (req, res, next) {
   console.log("Sending object data: " + objectDatabase);
-  res.send({ objects: objectDatabase, users: userLocations });
+  // Serialize for transport
+  var objects = [];
+  for (var objectId in objectDatabase) {
+    objects.push({
+      id: objectId,
+      x: objectDatabase[objectId].x,
+      y: objectDatabase[objectId].y,
+      z: objectDatabase[objectId].z,
+    });
+  }
+  var users = [];
+  for (var userId in userLocations) {
+    users.push({
+      id: userId,
+      x: userLocations[userId].x,
+      y: userLocations[userId].y,
+      z: userLocations[userId].z,
+    });
+  }
+  res.send({ objects: objects, users: users });
 });
 
 // error handler
