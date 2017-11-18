@@ -1,0 +1,6 @@
+node:
+  image: 'node:latest'
+server:
+  image: 'jacobkahn/multiplayar:latest'
+  ports:
+    - '3000'
