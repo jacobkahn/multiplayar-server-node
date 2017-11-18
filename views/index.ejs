@@ -75,6 +75,8 @@
                                 <ul class="nav">
                                     <li><a href="#line1_1">Importing the framework</a></li>
                                     <li><a href="#line1_2">Creating the game object</a></li>
+                                    <li><a href="#line1_3">Updating the game object</a></li>
+                                    <li><a href="#line1_4">Deleting the game object</a></li>
                                 </ul>
                             </li>
                             <li><a href="#line2">Setting up the server</a>
@@ -152,11 +154,58 @@
                                 <p> Our MultiplayARGameObject class inherits from GameObject. Thus we can simply pass in a GameObject as a parameter to the constructor. Alternatively, we can create a MultiplayARGameObject from scratch, and this will initialize a GameObject. </p>
 
                             <pre class="brush: html; highlight: [2,4]">
+                                // Instantiating with an existing gameObject
                                 GameObject g = new GameObject();
                                 MultiplayARGameOBject mpG = new MultiplayARGameObject(g);
 
+                                // Instantiating from scratch
                                 MultiplarARGameOBject mpG2 = new MultiplayARGameObject();
                             </pre>
+
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <hr>
+
+                        <div class="row">
+
+                            <div class="col-md-8">
+                                <h4 id="line1_2">Updating the game object - <a href="#top">#back to top</a></h4>
+                                <p> You can transform a MultiplayARGameObject in the same way as a regular GameObject. </p>
+
+                            <pre class="brush: html; highlight: [2,4]">
+                                MultiplayARGameOBject mpG = new MultiplayARGameObject();
+
+                                mpG.transform.position.x += 10;
+                                mpG.transform.position.y += 10;
+
+                                mpG.transform.rotation.x += 10;
+                                mpG.transform.rotation.y += 10;
+                            </pre>
+
+                            <p> Our framework will then send the object's new position to the central server which tells all the other clients the new location. There is no additional processing needed on the client's side.</p>
+
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <hr>
+
+                        <div class="row">
+
+                            <div class="col-md-8">
+                                <h4 id="line1_2">Deleting the game object - <a href="#top">#back to top</a></h4>
+                                <p> You can delete a MultiplayARGameObject in the same way as a regular GameObject. Our framework will then send the object's new position to the central server which will remove it from all clients.</p>
+
+                            <pre class="brush: html; highlight: [2,4]">
+                                MultiplayARGameOBject mpG = new MultiplayARGameObject();
+                                Destroy(mpG);
+                            </pre>
+
+                            <p> </p>
 
                             </div>
                             <!-- end col -->
