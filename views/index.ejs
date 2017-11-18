@@ -71,7 +71,12 @@
                     <nav class="docs-sidebar" data-spy="affix" data-offset-top="300" data-offset-bottom="200" role="navigation">
                         <ul class="nav">
                             <li><a href="#intro">Introduction</a></li>
-                            <li><a href="#line1">Getting Started</a></li>
+                            <li><a href="#line1">Getting Started</a>
+                                <ul class="nav">
+                                    <li><a href="#line1_1">Importing the framework</a></li>
+                                    <li><a href="#line1_2">Creating the game object</a></li>
+                                </ul>
+                            </li>
                             <li><a href="#line2">Setting up the server</a>
                                 <ul class="nav">
                                     <li><a href="#line2_1">Setting up the server #1</a></li>
@@ -106,7 +111,7 @@
 
                         <div class="row">
                             <div class="col-md-12 left-align">
-                                <h2 class="dark-text">Getting Started <a href="#top">#back to top</a><hr></h2>
+                                <h2 class="dark-text">Getting Started<a href="#top">#back to top</a><hr></h2>
                             </div>
                             <!-- end col -->
                         </div>
@@ -120,6 +125,41 @@
 
                                         </div>
                                     </div>
+                        </div>
+                        <!-- end row -->
+
+                        <div class="row">
+
+                            <div class="col-md-8">
+                                <h4 id="line1_1">Importing the framework - <a href="#top">#back to top</a></h4>
+                                <p>Download the Unity framework from the <a href="https://www.assetstore.unity3d.com/en/">Unity Asset Store</a>. To use the framework in your project, just import it. </p>
+
+                            <pre class="brush: html; highlight: [2,4]">
+                                using MultiplayAR
+                            </pre>
+
+                            </div>
+                            <!-- end col -->
+                        </div>
+                        <!-- end row -->
+
+                        <hr>
+
+                        <div class="row">
+
+                            <div class="col-md-8">
+                                <h4 id="line1_2">Creating the game object - <a href="#top">#back to top</a></h4>
+                                <p> Our MultiplayARGameObject class inherits from GameObject. Thus we can simply pass in a GameObject as a parameter to the constructor. Alternatively, we can create a MultiplayARGameObject from scratch, and this will initialize a GameObject. </p>
+
+                            <pre class="brush: html; highlight: [2,4]">
+                                GameObject g = new GameObject();
+                                MultiplayARGameOBject mpG = new MultiplayARGameObject(g);
+
+                                MultiplarARGameOBject mpG2 = new MultiplayARGameObject();
+                            </pre>
+
+                            </div>
+                            <!-- end col -->
                         </div>
                         <!-- end row -->
 
