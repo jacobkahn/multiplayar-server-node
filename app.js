@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var uuid = require('uuid');
 
 // var index = require('./routes/index');
 
@@ -51,22 +52,27 @@ app.get('/', function (req, res, next) {
  */
 app.post('/anchor', function (req, res, next) {
   console.log(req.body);
-  var userCoords = JSON.parse(req.body.userCoords);
-  var userId = parseInt(req.body.userId);
-  console.log("Setting ser " + userId + " at coords " + JSON.stringify(userCoords));
+  var userCoords = { x: req.body.x, y: req.body.y, z: req.body.z };
+
+  var userId = uuid();
+  console.log("Setting user " + userId + " at coords " + JSON.stringify(userCoords));
   userLocations[userId] = userCoords;
-  res.send(200);
+  res.send(userId);
 });
 
 /**
  * Creates or updates a new object at some global offset
  */
 app.post('/object', function (req, res, next) {
-  var objectId = parseInt(req.body.objectId);
-  var objectCoords = JSON.parse(req.body.objectCoords);
+  var objectId = uuid();
+  if (req.body.objectId) {
+    // We're updating an existing object id
+    objectId = req.body.objectId;
+  }
+  var objectCoords = { x: req.body.x, y: req.body.y, z: req.body.z };
   console.log("Creating new object with id " + objectId + " at coords " + JSON.stringify(objectCoords));
   objectDatabase[objectId] = objectCoords;
-  res.send(200);
+  res.send(objectId);
 });
 
 /**
@@ -78,7 +84,7 @@ app.get('/sync', function (req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
