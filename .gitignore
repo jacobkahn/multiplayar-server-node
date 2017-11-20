@@ -5,6 +5,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+**/.DS_Store
+
 # Background logs
 nohup.out
 
@@ -59,4 +61,3 @@ typings/
 
 # dotenv environment variables file
 .env
-
