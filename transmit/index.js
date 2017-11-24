@@ -69,4 +69,10 @@ router.get('/sync', function(req, res, next) {
   res.send(response);
 });
 
+router.get('/clear', function(req, res, next) {
+  userLocations = {};
+  objectDatabase = {};
+  res.send({});
+});
+
 module.exports = router
