@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var transmitRouter = require('./transmit');
 
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,6 +39,10 @@ app.get('/', function(req, res, next) {
   res.render('index', {title : 'MultiplayAR'});
 });
 
+app.get('/visualize', function(req, res, next) {
+  res.render('visualize');
+});
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -47,5 +53,11 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// Start socketio
+server.listen(3030);
+
+// Include socket-related routes
+var router = require('./visualize')(app, io);
 
 module.exports = app;
