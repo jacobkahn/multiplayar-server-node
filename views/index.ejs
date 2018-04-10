@@ -73,16 +73,15 @@
                             <li><a href="#intro">Introduction</a></li>
                             <li><a href="#line1">Getting Started</a>
                                 <ul class="nav">
-                                    <li><a href="#line1_1">Importing the framework</a></li>
-                                    <li><a href="#line1_2">Creating the game object</a></li>
-                                    <li><a href="#line1_3">Updating the game object</a></li>
-                                    <li><a href="#line1_4">Deleting the game object</a></li>
+                                    <li><a href="#line1_1">Getting the framework</a></li>
+                                    <li><a href="#line1_2">Attaching the network script</a></li>
+                                    <li><a href="#line1_3">Creating game objects</a></li>
                                 </ul>
                             </li>
                             <li><a href="#payment">Payment Options</a>
                                 <ul class="nav">
-                                    <li><a href="#payment_free">Free Open Source</a></li>
-                                    <li><a href="#payment_paypal">Paypal</a></li>
+                                    <li><a href="#payment_free">Open Source</a></li>
+                                    <li><a href="#payment_paypal">Docker</a></li>
                                 </ul>
                             </li>
                             <li><a href="#line2">Setting up the server</a>
@@ -105,7 +104,9 @@
 
                                     <div class="col-md-12 full">
                                         <div>
-                                            <p>Welcome to MultiplayAR. We are the first and only solution to enabling multi-player augmented reality solutions. MultiplayAR is a library written for the Unity ARKit plugin that allows developers create shared augmented reality experiences for iOS users. You can found the source code <a href="https://github.com/jacobkahn/multiplayar-server"> here </a>. </p>
+                                            <p>Welcome to MultiplayAR, a novel solution to enabling multi-player augmented reality solutions. MultiplayAR is a library written for the Unity ARKit plugin that allows developers to create shared augmented reality experiences for iOS users. You can found the source code for the server here <a href="https://github.com/jacobkahn/multiplayar"> here </a> and the for the unity files here <a href="https://github.com/jacobkahn/multiplayar-core"> here </a> <br>
+
+                                            We developed MultiplayAR for Computer Information Science Senior Design at the University of Pennsylvania. Below you can find information about how to set up our project for yourself.</p>
 
                                         </div>
                                     </div>
@@ -129,12 +130,8 @@
                         <div class="row">
 
                             <div class="col-md-8">
-                                <h4 id="line1_1">Importing the framework - <a href="#top">#back to top</a></h4>
-                                <p>Download the Unity framework from the <a href="https://www.assetstore.unity3d.com/en/">Unity Asset Store</a>. To use the framework in your project, just import it. </p>
-
-                            <pre class="brush: html; highlight: [2,4]">
-                                using MultiplayAR
-                            </pre>
+                                <h4 id="line1_1">Getting the framework - <a href="#top">#back to top</a></h4>
+                                <p> From our <a href="https://github.com/jacobkahn/multiplayar"> github </a>, download the NetworkManager.cs from Assets > Scripts.
 
                             </div>
                             <!-- end col -->
@@ -146,17 +143,9 @@
                         <div class="row">
 
                             <div class="col-md-8">
-                                <h4 id="line1_2">Creating the game object - <a href="#top">#back to top</a></h4>
-                                <p> Our MultiplayARGameObject class inherits from GameObject. Thus we can simply pass in a GameObject as a parameter to the constructor. Alternatively, we can create a MultiplayARGameObject from scratch, and this will initialize a GameObject. </p>
+                                <h4 id="line1_2">Attaching the network script - <a href="#top">#back to top</a></h4>
+                                <p> Add “NetworkManager.cs” as a script to a GameObject and modify a viewport attribute to include your server URL. </p>
 
-                            <pre class="brush: html; highlight: [2,4]">
-                                // Instantiating with an existing gameObject
-                                GameObject g = new GameObject();
-                                MultiplayARGameOBject mpG = new MultiplayARGameObject(g);
-
-                                // Instantiating from scratch
-                                MultiplarARGameOBject mpG2 = new MultiplayARGameObject();
-                            </pre>
 
                             </div>
                             <!-- end col -->
@@ -168,20 +157,10 @@
                         <div class="row">
 
                             <div class="col-md-8">
-                                <h4 id="line1_3">Updating the game object - <a href="#top">#back to top</a></h4>
-                                <p> You can transform a MultiplayARGameObject in the same way as a regular GameObject. </p>
+                                <h4 id="line1_3">Creating game objects - <a href="#top">#back to top</a></h4>
+                                <p> Whenever you create a GameObject, attach the "MultiplayAR.cs" script. Then, any object that is instantiated on a synced phone will show up on all synced forms. </p>
 
-                            <pre class="brush: html; highlight: [2,4]">
-                                MultiplayARGameOBject mpG = new MultiplayARGameObject();
-
-                                mpG.transform.position.x += 10;
-                                mpG.transform.position.y += 10;
-
-                                mpG.transform.rotation.x += 10;
-                                mpG.transform.rotation.y += 10;
-                            </pre>
-
-                            <p> Our framework will then send the object's new position to the central server which tells all the other clients the new location. There is no additional processing needed on the client's side.</p>
+                            <p> Our framework will send the object's new position to the central server which tells all the other clients the new location. There is no additional processing needed on the client's side.</p>
 
                             </div>
                             <!-- end col -->
@@ -189,24 +168,6 @@
                         <!-- end row -->
 
                         <hr>
-
-                        <div class="row">
-
-                            <div class="col-md-8">
-                                <h4 id="line1_4">Deleting the game object - <a href="#top">#back to top</a></h4>
-                                <p> You can delete a MultiplayARGameObject in the same way as a regular GameObject. Our framework will then send the object's new position to the central server which will remove it from all clients.</p>
-
-                            <pre class="brush: html; highlight: [2,4]">
-                                MultiplayARGameOBject mpG = new MultiplayARGameObject();
-                                Destroy(mpG);
-                            </pre>
-
-                            <p> </p>
-
-                            </div>
-                            <!-- end col -->
-                        </div>
-                        <!-- end row -->
 
                     </section>
                     <!-- end section -->
@@ -224,8 +185,8 @@
                         <div class="row">
 
                             <div class="col-md-8">
-                                <h4 id="payment_free">Free Open Source - <a href="#top">#back to top</a></h4>
-                                <p>MultiplayAR is provided for free on <a href="https://github.com/devesh95/multiplayar">Github</a>. In order to use our system, you need to set up a server to process all of the client data. Follow the <a href="#line2">tutorial</a>  to learn how to roll your own system.</p>
+                                <h4 id="payment_free">Open Source - <a href="#top">#back to top</a></h4>
+                                <p>MultiplayAR's Server code is provided for free on <a href="https://github.com/jacobkahn/multiplayar-core">Github</a>. In order to use our system, you need to set up a server to process all of the client data. Follow the <a href="#line2">tutorial</a>  to learn how to roll your own system.</p>
                             </div>
                             <!-- end col -->
                         </div>
@@ -236,8 +197,8 @@
                         <div class="row">
 
                             <div class="col-md-8">
-                                <h4 id="payment_paypal">Paypal - <a href="#top">#back to top</a></h4>
-                                <p>Want to remove the hassle of setting up your own server? Use ours for a small fee of just $4.99 a month. Our one click system, sets up a Docker instance and we'll host all of your data for you.</p>
+                                <h4 id="payment_paypal">Docker - <a href="#top">#back to top</a></h4>
+                                <p>Want to remove the hassle of setting up your own server? Use ours, through our one click system, which sets up a Docker instance and we'll host all of your data for you.</p>
                                 <a href="https://cloud.docker.com/stack/deploy/?repo=https://github.com/jacobkahn/multiplayar-server" rel="nofollow">
                                     <img src="https://files.cloud.docker.com/images/deploy-to-dockercloud.svg" alt="Deploy to Docker Cloud" data-canonical-src="https://files.cloud.docker.com/images/deploy-to-dockercloud.svg" style="max-width:100%;">
                                 </a>
@@ -266,7 +227,7 @@
 
                             <div class="col-md-8">
                                 <h4 id="line2_1">Setting up the server #1 - <a href="#top">#back to top</a></h4>
-                                <p>Lorem the It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. long established fact that a reader will English.</p>
+                                <p></p>
                             </div>
                             <!-- end col -->
                         </div>
@@ -281,7 +242,7 @@
 
                             <div class="col-md-8">
                                 <h4 id="line2_2">Setting up the server #2 - <a href="#top">#back to top</a></h4>
-                                <p>Lorem the It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. long established fact that a reader will English.</p>
+                                <p></p>
                             </div>
                             <!-- end col -->
                         </div>
@@ -302,12 +263,12 @@
 
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="images/upload/thumbnail.png" alt="" class="img-responsive img-thumbnail">
+                                <img src="images/upload/akshat.png" alt="" class="img-responsive img-thumbnail">
                             </div>
 
                             <div class="col-md-8">
                                 <h4>Akshat Agrawal</h4>
-                                <p></p>
+                                <p>Akshat is a senior at the University of Pennsylvania pursuing a BSE in Computer Science and a BS in Economics from the Wharton school concentrating in Management and Business Analytics.</p>
                             </div>
                             <!-- end col -->
                         </div>
@@ -322,7 +283,7 @@
 
                             <div class="col-md-8">
                                 <h4>Krishna Bharathala</h4>
-                                <p>Krishna is a senior at the University of Pennsylvania pursuing a MSE and BSE in Computer Science and a BS in Economics from the Wharton school concentrating in Entrepreneurship and Innovation. He will be starting at Google as an Associate Product Manager in the Fall. [[ blah blah blah more information ]] [[should include github/linkedin/etc]] </p>
+                                <p>Krishna is a senior at the University of Pennsylvania pursuing an MSE and BSE in Computer Science and a BS in Economics from the Wharton school concentrating in Management.</p>
                             </div>
                             <!-- end col -->
                         </div>
@@ -337,7 +298,7 @@
 
                             <div class="col-md-8">
                                 <h4>Devesh Dayal</h4>
-                                <p></p>
+                                <p>Devesh is a senior at the University of Pennsylvania pursuing an MSE and BSE in Computer Science and a BS in Economics from the Wharton school concentrating in Management and Business Analytics.</p>
                             </div>
                             <!-- end col -->
                         </div>
@@ -352,7 +313,7 @@
 
                             <div class="col-md-8">
                                 <h4>Jacob Kahn</h4>
-                                <p></p>
+                                <p>Jacob is a senior at the University of Pennsylvania pursuing an MSE and BSE in Computer Science and a BS in Economics from the Wharton school concentrating in Statistics and Business Analytics.</p>
                             </div>
                             <!-- end col -->
                         </div>
@@ -367,7 +328,7 @@
 
                             <div class="col-md-8">
                                 <h4>Amit Patel</h4>
-                                <p></p>
+                                <p>Amit is a senior at the University of Pennsylvania pursuing a BSE in Computer Science and a BS in Economics from the Wharton school concentrating in Finance.</p>
                             </div>
                             <!-- end col -->
                         </div>
